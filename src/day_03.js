@@ -85,5 +85,58 @@ export const levelOne = ({ input, lines }) => {
  * @returns {Number|String}
  */
 export const levelTwo = ({ input, lines }) => {
-  // your code here
+
+  let sum = 0
+  const gearCoordinates = {}
+  let adjacentGearCoordinates = new Set()
+
+  const getAdjacentGearCoordinates = (colIdx, rowIdx) => {
+    const coords = []
+    for (let x = -1; x < 2; x++) {
+      for (let y = -1; y < 2; y++) {
+        if (lines[colIdx + x]?.[rowIdx + y] === '*') {
+          coords.push(`${colIdx + x},${rowIdx + y}`)
+        }
+      }
+    }
+    return coords
+  }
+
+  //I think this time it'll be best to avoid the nested for loops and instead just do a single loop and keep track of startingIndex.
+  lines.forEach( (line, colIdx) => {
+    let numFirstIdx = null
+
+    // Needs to extend one past last index of the line because slice is not inclusive.
+    for (let rowIdx = 0; rowIdx < line.length + 1; rowIdx++) {
+      if (isNaN(line[rowIdx])) {
+        if (numFirstIdx !== null) {
+          // reached last digit of number. Add to gearCoords and stuff
+          adjacentGearCoordinates.forEach( coords => {
+            gearCoordinates[coords] ||= {}
+            gearCoordinates[coords][`${colIdx},${numFirstIdx}`] = Number(line.slice(numFirstIdx, rowIdx))
+          })
+          // reset adjacent gears
+          adjacentGearCoordinates = new Set()
+          numFirstIdx = null;
+
+        }
+
+        continue;
+      } else {
+        if (numFirstIdx === null) {
+          numFirstIdx = rowIdx
+        }
+        adjacentGearCoordinates = new Set([...adjacentGearCoordinates, ...getAdjacentGearCoordinates(colIdx, rowIdx)])
+      }
+    }
+  })
+
+  Object.entries(gearCoordinates).forEach( ([_gearCoordinates, adjacentNumbers]) => {
+    const numbers = Object.values(adjacentNumbers)
+    if (numbers.length === 2){
+      sum += numbers[0] * numbers[1]
+    }
+  })
+
+  return sum
 };

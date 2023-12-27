@@ -11,7 +11,28 @@
  * @returns {Number|String}
  */
 export const levelOne = ({ input, lines }) => {
-  // your code here
+
+  const seeds = lines[0].slice(7).split(' ').map(seed => Number(seed))
+  let seedsChanged = seeds.map(() => false)
+  let currentRange;
+  for (let i = 3; i < lines.length; i++) {
+    if (!isNaN(lines[i][0])) {
+      currentRange = lines[i].split(' ').map(num => Number(num))
+      seeds.forEach((seed, j) => {
+        if (
+          (currentRange[1] <= seed) && (seed < currentRange[1] + currentRange[2])
+          && !seedsChanged[j]
+        ) {
+          seeds[j] = currentRange[0] - currentRange[1] + seed
+          seedsChanged[j] = true
+        }
+      })
+    } else {
+      seedsChanged = seedsChanged.map(() => false)
+    }
+  }
+
+ return Math.min(...seeds)
 };
 
 /**
