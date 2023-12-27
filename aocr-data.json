@@ -1,6 +1,1 @@
-{
-  "version": "1.6.1",
-  "year": 2023,
-  "description": "This file is where your progress is stored. It should be committed to source control. You shouldn't edit this file manually, it could cause unexpected errors.",
-  "puzzles": []
-}
+{"version":"1.6.1","year":2023,"description":"This file is where your progress is stored. It should be committed to source control. You shouldn't edit this file manually, it could cause unexpected errors.","puzzles":[{"id":"20230101","fastestRuntimeNs":658200,"incorrectAnswers":[],"correctAnswer":"54916"},{"id":"20230102","fastestRuntimeNs":3086800,"incorrectAnswers":[],"correctAnswer":"54728"},{"id":"20230201","fastestRuntimeNs":715400,"incorrectAnswers":[],"correctAnswer":"2256"},{"id":"20230202","fastestRuntimeNs":716900,"incorrectAnswers":[],"correctAnswer":"74229"},{"id":"20230301","fastestRuntimeNs":99999999999,"incorrectAnswers":[],"correctAnswer":"540212"},{"id":"20230302","fastestRuntimeNs":99999999999,"incorrectAnswers":[],"correctAnswer":"87605697"},{"id":"20230401","fastestRuntimeNs":99999999999,"incorrectAnswers":[],"correctAnswer":"23441"},{"id":"20230402","fastestRuntimeNs":99999999999,"incorrectAnswers":[],"correctAnswer":"5923918"},{"id":"20230501","fastestRuntimeNs":99999999999,"incorrectAnswers":[],"correctAnswer":"551761867"}]}
