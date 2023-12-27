@@ -11,7 +11,36 @@
  * @returns {Number|String}
  */
 export const levelOne = ({ input, lines }) => {
-  // your code here
+  let sum = 0;
+
+  const gemAmounts = {
+    red: 12,
+    green: 13,
+    blue: 14,
+  }
+
+  lines.forEach(line => {
+    const [gameInfo, handfulInfo] = line.split(':');
+    const [_, gameNumber] = gameInfo.split(' ');
+    const handfuls = handfulInfo.split(';');
+
+    let isImpossible = false
+    handfuls.forEach(handful => {
+      const gems = handful.split(',')
+      gems.forEach(gem => {
+        const [numberGems, color] = gem.trim().split(' ')
+        if (Number(numberGems) > gemAmounts[color]) {
+          isImpossible = true
+        }
+      })
+    })
+
+    if (!isImpossible) {
+      sum += Number(gameNumber)
+    }
+  })
+
+  return sum
 };
 
 /**
@@ -22,5 +51,32 @@ export const levelOne = ({ input, lines }) => {
  * @returns {Number|String}
  */
 export const levelTwo = ({ input, lines }) => {
-  // your code here
+  let sum = 0;
+
+  let maxColors = {
+    red: 1,
+    green: 1,
+    blue: 1,
+  }
+
+  const [_, handfulInfo] = line.split(':');
+  const handfuls = handfulInfo.split(';');
+
+  handfuls.forEach(handful => {
+    const gems = handful.split(',')
+    gems.forEach( gem => {
+      const [numberGems, color] = gem.trim().split(' ')
+
+      maxColors[color] = Math.max(numberGems, maxColors[color])
+
+    })
+  })
+
+  sum += maxColors.red * maxColors.green * maxColors.blue
+
+  maxColors = {
+    red: 1,
+    green: 1,
+    blue: 1,
+  }
 };

@@ -13,7 +13,7 @@
 export const levelOne = ({ input, lines }) => {
   let sum = 0;
 
-  lines.forEach( line => {
+  lines.forEach(line => {
     let first;
     let last;
 
@@ -39,5 +39,46 @@ export const levelOne = ({ input, lines }) => {
  * @returns {Number|String}
  */
 export const levelTwo = ({ input, lines }) => {
-  // your code here
+  let sum = 0;
+  const numWordStarts = new Set(['z', 'o', 't', 's', 'e', 'n'])
+  const numWords = new Map([
+    ['zero', 0],
+    ['one', 1],
+    ['two', 2],
+    ['three', 3],
+    ['four', 4],
+    ['five', 5],
+    ['six', 6],
+    ['seven', 7],
+    ['eight', 8],
+    ['nine', 9],
+  ])
+
+
+  lines.forEach(line => {
+    let first;
+    let last;
+
+    for (let i = 0; i < line.length; i++) {
+      if (!isNaN(line[i])) {
+        if (isNaN(first)) {
+          first = line[i]
+        }
+        last = line[i]
+      } else if (numWordStarts.has[line[i]]){
+        for (let j = i + 1; j < i + 5; j++) {
+          if (numWords.has(line.slice(i, j))) {
+            if (isNaN(first)) {
+              first = numWords.get(line.slice(i, j))
+            }
+            last = numWords.get(line.slice(i, j))
+          }
+          
+        }
+      }
+    }
+    sum += Number(`${first}${last}`)
+  })
+
+  return sum
 };
