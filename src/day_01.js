@@ -40,7 +40,7 @@ export const levelOne = ({ input, lines }) => {
  */
 export const levelTwo = ({ input, lines }) => {
   let sum = 0;
-  const numWordStarts = new Set(['z', 'o', 't', 's', 'e', 'n'])
+  const numWordStarts = new Set(['z', 'o', 't', 's', 'e', 'n', 'f'])
   const numWords = new Map([
     ['zero', 0],
     ['one', 1],
@@ -65,15 +65,15 @@ export const levelTwo = ({ input, lines }) => {
           first = line[i]
         }
         last = line[i]
-      } else if (numWordStarts.has[line[i]]){
-        for (let j = i + 1; j < i + 5; j++) {
+      } else if (numWordStarts.has(line[i])) {
+        for (let j = i + 1; j < i + 6; j++) {
           if (numWords.has(line.slice(i, j))) {
             if (isNaN(first)) {
               first = numWords.get(line.slice(i, j))
             }
             last = numWords.get(line.slice(i, j))
           }
-          
+
         }
       }
     }
