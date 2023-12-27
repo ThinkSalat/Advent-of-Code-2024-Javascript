@@ -53,30 +53,28 @@ export const levelOne = ({ input, lines }) => {
 export const levelTwo = ({ input, lines }) => {
   let sum = 0;
 
-  let maxColors = {
-    red: 1,
-    green: 1,
-    blue: 1,
-  }
+  lines.forEach(line => {
+    let maxColors = {
+      red: 1,
+      green: 1,
+      blue: 1,
+    }
 
-  const [_, handfulInfo] = line.split(':');
-  const handfuls = handfulInfo.split(';');
+    const [_, handfulInfo] = line.split(':');
+    const handfuls = handfulInfo.split(';');
 
-  handfuls.forEach(handful => {
-    const gems = handful.split(',')
-    gems.forEach( gem => {
-      const [numberGems, color] = gem.trim().split(' ')
+    handfuls.forEach(handful => {
+      const gems = handful.split(',')
+      gems.forEach(gem => {
+        const [numberGems, color] = gem.trim().split(' ')
 
-      maxColors[color] = Math.max(numberGems, maxColors[color])
+        maxColors[color] = Math.max(numberGems, maxColors[color])
 
+      })
     })
+
+    sum += maxColors.red * maxColors.green * maxColors.blue
   })
 
-  sum += maxColors.red * maxColors.green * maxColors.blue
-
-  maxColors = {
-    red: 1,
-    green: 1,
-    blue: 1,
-  }
+  return sum
 };
