@@ -1,0 +1,43 @@
+/**
+ * Contains solutions for Day 1
+ * Puzzle Description: https://adventofcode.com/2023/day/1
+ */
+
+/**
+ * Returns the solution for level one of this puzzle.
+ * @param {Object} args - Provides both raw and split input.
+ * @param {String} args.input - The original, unparsed input string.
+ * @param {String[]} args.lines - Array containing each line of the input string.
+ * @returns {Number|String}
+ */
+export const levelOne = ({ input, lines }) => {
+  let sum = 0;
+
+  lines.forEach( line => {
+    let first;
+    let last;
+
+    for (let i = 0; i < line.length; i++) {
+      if (!isNaN(line[i])) {
+        if (isNaN(first)) {
+          first = line[i]
+        }
+        last = line[i]
+      }
+    }
+    sum += Number(`${first}${last}`)
+  })
+
+  return sum
+};
+
+/**
+ * Returns the solution for level two of this puzzle.
+ * @param {Object} args - Provides both raw and split input.
+ * @param {String} args.input - The original, unparsed input string.
+ * @param {String[]} args.lines - Array containing each line of the input string.
+ * @returns {Number|String}
+ */
+export const levelTwo = ({ input, lines }) => {
+  // your code here
+};

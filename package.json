@@ -1,0 +1,19 @@
+{
+	"name": "aoc2023",
+	"version": "1.0.0",
+	"description": "Solutions to Advent of Code 2023",
+	"scripts": {
+		"solve": "advent-of-code-runner solve",
+		"submit": "advent-of-code-runner submit",
+		"stats": "advent-of-code-runner stats",
+		"auth": "advent-of-code-runner auth",
+		"help": "advent-of-code-runner help"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "module",
+	"dependencies": {
+		"advent-of-code-runner": "^1.6.1"
+	}
+}
