@@ -9,8 +9,8 @@ const getNumSolutions = (time, distance) => {
   const sqrtDiscriminant = Math.sqrt(discriminant);
 
   // Calculate the floor and ceiling values
-  const floorValue = Math.floor((-time + sqrtDiscriminant) / -2);
-  const ceilValue = Math.ceil((-time - sqrtDiscriminant) / -2);
+  const floorValue = Math.floor((-time + sqrtDiscriminant) / 2);
+  const ceilValue = Math.ceil((-time - sqrtDiscriminant) / 2);
 
   // Calculate the number of solutions within the valid range
   const numSolutions = Math.min(floorValue, time - 1) - ceilValue + 1
