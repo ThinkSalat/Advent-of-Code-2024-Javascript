@@ -175,7 +175,48 @@ ZZZ = (ZZZ, ZZZ)`
  * 
  * I want to try one last one that's using an object instead of a map
  * that just barely edges out by like 100 microseconds
+ * 
+ * 
+ * Ok level 2 is nothing like i expected. 
+ * Not sure how to optimize this, it's pretty complex. 
+ * I think I'll create the node object same aas before, and just add the nodes that end in A into an array
+ * 
+ * Then I guess I'll loop through the array, overwriting what's in it until the entire array is values that end in Z, counting each time I complete the loop
+ * 
+ * it's infinite looping. apparently that's a terrible solution
+ * There's apparently a better way of doing it that I'm not thinking about
+ * 
+ * in the sample, there's a recursion - (XXX) = XXX, XXX. So once key goes to one of these
+ * it ends up looping over itself constantly
+ * 
+ * ok this one is math again. I was kinda on the track but I discarded
+ * the idea too soon. Something like finding least common denominator
+ * or multiple or wwhatever of all the results. so just run level 1
+ * code for each key, and from those answers you can find the results
+ * apparently if you just run it, it's not nearly as efficient cuz you're waiting
+ * for them all to line up. Will get the answers and then do somet more thinking
+ * so I'm not just copying the answer.
+ * 
+ * 
+ * Ok I cheated. it's the LCM (Least common multiple).
+ * I've got the array of results mapped. Now I just find the least common multiple
+ * Let's reasion about as to why that is. I'm a little confused as to how
+ * 
+ * Oh I see i see. I was thinking of least common factor or denominator or whatever
+ * I was thinking it was going to be smaller. a multiple is anything that is divisible
+ * by your number. so multiples of 4 are 4, 8, 12, 18, etc.
+ * So basically I find the smallest number that is divisble by all of the nubmers in the array
+ * 
+ * LCM calculation is actually pretty involved. Maybe it will do better
+ * to calculate a running lcm - so once you have 2 values, you get the lcm of those
+ * 2 values. something like currentLCM. then every new value you get, you return the new LCM
+ * 
+ * Ok so I used some prior art but I think that's fine. on to the next
  */
+
+const gcd = (a, b) => a ? gcd(b % a, a) : b;
+
+const lcm = (a, b) => a * b / gcd(a, b);
 
 /**
  * Returns the solution for level one of this puzzle.
@@ -214,5 +255,30 @@ export const levelOne = ({ input, lines }) => {
  * @returns {Number|String}
  */
 export const levelTwo = ({ input, lines }) => {
-  // your code here
+  const lrInput = Array.from(lines[0]).map(l => l === 'L' ? 0 : 1)
+  const lrInputLength = lrInput.length
+
+  const keys = []
+  const nodes = lines.slice(2).reduce((obj, line) => {
+    const key = line.slice(0, 3)
+    obj[key] = [line.slice(7, 10), line.slice(12, 15)]
+
+    if (key[2] === 'A') {
+      keys.push(key)
+    }
+
+    return obj
+  }, {})
+
+  const mappedKeys = keys.map( key => {
+      let sum = 0
+    
+      while (key.at(-1) !== 'Z') {
+        key = nodes[key][lrInput[sum % lrInputLength]]
+        sum++
+      }
+      return sum
+  })
+
+  return mappedKeys.reduce(lcm)
 };
