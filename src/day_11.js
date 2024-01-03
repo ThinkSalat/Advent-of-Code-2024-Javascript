@@ -214,12 +214,12 @@ export const levelTwo = ({ input, lines }) => {
       let colDiff = Math.abs(gColA - gColB)
       emptyRows.forEach(emptyRowIdx => {
         if (Math.min(gRowA, gRowB) < emptyRowIdx && emptyRowIdx < Math.max(gRowA, gRowB)) {
-          rowDiff += 1000000
+          rowDiff += 999_999
         }
       })
       emptyCols.forEach(emptyColIdx => {
         if (Math.min(gColA, gColB) < emptyColIdx && emptyColIdx < Math.max(gColA, gColB)) {
-          colDiff += 1000000
+          colDiff += 999_999
         }
       })
       totalDistance += rowDiff + colDiff
