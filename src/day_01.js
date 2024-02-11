@@ -59,21 +59,23 @@ export const levelTwo = ({ input, lines }) => {
     let first;
     let last;
 
+    let j
     for (let i = 0; i < line.length; i++) {
       if (!isNaN(line[i])) {
+        last = line[i]
         if (isNaN(first)) {
           first = line[i]
         }
-        last = line[i]
       } else if (numWordStarts.has(line[i])) {
         for (let j = i + 1; j < i + 6; j++) {
           if (numWords.has(line.slice(i, j))) {
+            last = numWords.get(line.slice(i, j))
             if (isNaN(first)) {
               first = numWords.get(line.slice(i, j))
             }
-            last = numWords.get(line.slice(i, j))
+            i = j - 2;
+            break;
           }
-
         }
       }
     }
